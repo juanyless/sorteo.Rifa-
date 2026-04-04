@@ -51,7 +51,7 @@ function confirmarCompra(id, numStr) {
     
     if (confirmar) {
         // Redirección a WhatsApp
-        const mensaje = `Hola! Quiero el número ${numStr}. El valor es $1.000. Mi alias es ${alias}`;
+        const mensaje = `Hola! Quiero el número ${numStr}. El valor es $4.000. Mi alias es ${alias}`;
         window.open(`https://wa.me/${telefono}?text=${encodeURIComponent(mensaje)}`, '_blank');
 
         // Guardar en Firebase (esto bloquea el número para todos)
