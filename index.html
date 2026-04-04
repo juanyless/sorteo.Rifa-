@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sorteo 100 Números</title>
+
+    <script src="https://www.gstatic.com/firebasejs/9.17.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.17.1/firebase-database-compat.js"></script>
+ <link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+    <nav class="navbar">
+        <div class="nav-content">
+            <span>Sorteo Online</span>
+            <span class="precio-tag">Valor del número: <strong>$4.000</strong></span>
+        </div>
+    </nav>
+
+    <header>
+        <h1>Elige tu número de la suerte</h1>
+        <h2>todos los premios tienen de regalo 1 
+            AURICULAR BLUETOOTH A6S </h2>
+            Sortea por la loteria de "Santa Fe Nocturna" 4 de mayo dia mundia de la risa <br>regalate una sonrisa y gana!!!
+        
+    </header>
+
+    <section class="premios-seccion">
+        <div class="premio-card">
+            <div class="foto-contenedor">
+                <img src="art-3683-1.jpg" alt="Primer Premio">
+            </div>
+            <div class="premio-info">
+                <h3>1° PREMIO</h3>
+                <p>FRAPERA RGB PARLANTE</p>
+            </div>
+        </div>
+    
+        <div class="premio-card">
+            <div class="foto-contenedor">
+                <img src="art-4036-1.jpg" alt="Segundo Premio">
+            </div>
+            <div class="premio-info">
+                <h3>2° PREMIO</h3>
+                <p>AURICULAR DISNEY BLUETOOTH LABUBU </p>
+            </div>
+        </div>
+
+        <div class="premio-card">
+            <div class="foto-contenedor">
+                <img src="art-2578-1.jpg" alt="Tercero Premio">
+            </div>
+            <div class="premio-info">
+                <h3>3° PREMIO</h3>
+                <p>REPETIDOR WIFI</p>
+            </div>
+        </div>
+    </section>
+    <h2>Haz clic en un número para comprarlo por WhatsApp</h2>
+
+    <main id="contenedor-numeros" class="grid-container">
+        </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
