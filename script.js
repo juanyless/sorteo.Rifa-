@@ -96,7 +96,7 @@ function finalizarCompraMultiple() {
     
     if (confirmar) {
         // Redirección a WhatsApp con todos los números
-        const mensaje = `¡Hola! Quiero los números: ${listaNumeros}. Total a pagar: $${total}. Mi alias es ${alias}`;
+        const mensaje = `¡Hola! Quiero los números: ${listaNumeros}. Total a pagar: $${total}. Gracias Por tu Compra!!! Paga aqui este es mi Alias. SUERTE!!! ${alias}`;
         window.open(`https://wa.me/${telefono}?text=${encodeURIComponent(mensaje)}`, '_blank');
 
         // Guardar todos en Firebase
