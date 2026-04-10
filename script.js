@@ -15,7 +15,7 @@ const database = firebase.database();
 
 const contenedor = document.getElementById('contenedor-numeros');
 const telefono = "543424494674"; 
-const alias = "alpes .cero .duque .mp";
+const alias = " ESTE ES MI ALIAS: alpes .cero .duque .mp";
 
 // VARIABLE PARA GUARDAR LA SELECCIÓN TEMPORAL
 let seleccionados = [];
@@ -96,7 +96,7 @@ function finalizarCompraMultiple() {
     
     if (confirmar) {
         // Redirección a WhatsApp con todos los números
-        const mensaje = `¡Hola! Quiero los números: ${listaNumeros}. Total a pagar: $${total}. Envia el comrovante con tu nombre, Paga aqui este es mi Alias. gracias por tu compra!!! ${alias}`;
+        const mensaje = `¡Hola! Quiero los números: ${listaNumeros}. Total a pagar: $${total}. Envia el comrovante con tu nombre, gracias por tu compra!!! Mucha suerte!!!! ${alias}`;
         window.open(`https://wa.me/${telefono}?text=${encodeURIComponent(mensaje)}`, '_blank');
 
         // Guardar todos en Firebase
