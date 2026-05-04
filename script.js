@@ -13,20 +13,26 @@ const firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 const database = firebase.database();
 
-const contenedor = document.getElementById('contenedor-numeros');
+// Variables globales
+let contenedor; 
 const telefono = "543424494674"; 
 const alias = " ESTE ES MI ALIAS: alpes .cero .duque .mp";
-
-// VARIABLE PARA GUARDAR LA SELECCIÓN TEMPORAL
 let seleccionados = [];
 
-// 2. Escuchar la base de datos en tiempo real
-database.ref('vendidos').on('value', (snapshot) => {
-    const numerosComprados = snapshot.val() || [];
-    renderizarTablero(numerosComprados);
+// ESPERAR A QUE EL HTML ESTÉ TOTALMENTE CARGADO
+window.addEventListener('DOMContentLoaded', () => {
+    // RECIÉN AQUÍ buscamos el contenedor
+    contenedor = document.getElementById('contenedor-numeros');
+
+    // Escuchar la base de datos en tiempo real
+    database.ref('vendidos').on('value', (snapshot) => {
+        const numerosComprados = snapshot.val() || [];
+        renderizarTablero(numerosComprados);
+    });
 });
 
 function renderizarTablero(comprados) {
+    if (!contenedor) return; 
     contenedor.innerHTML = ""; 
 
     for (let i = 0; i < 100; i++) {
@@ -39,12 +45,10 @@ function renderizarTablero(comprados) {
             boton.classList.add('vendido');
             boton.onclick = () => alert("Este número ya fue reservado.");
         } else {
-            // Si el número ya está en nuestra selección temporal, lo pintamos
             if (seleccionados.includes(i)) {
-                boton.classList.add('seleccionado'); // Asegúrate de tener este estilo en tu CSS
-                boton.style.backgroundColor = "#ffc107"; // Color amarillo de selección
+                boton.classList.add('seleccionado');
+                boton.style.backgroundColor = "#ffc107"; 
             }
-
             boton.onclick = () => alternarSeleccion(i, boton);
         }
         contenedor.appendChild(boton);
@@ -54,25 +58,20 @@ function renderizarTablero(comprados) {
 
 function alternarSeleccion(id, elemento) {
     const index = seleccionados.indexOf(id);
-    
     if (index > -1) {
-        // Si ya estaba, lo quitamos
         seleccionados.splice(index, 1);
-        elemento.style.backgroundColor = ""; // Vuelve al color original
+        elemento.style.backgroundColor = ""; 
         elemento.classList.remove('seleccionado');
     } else {
-        // Si no estaba, lo agregamos
         seleccionados.push(id);
-        elemento.style.backgroundColor = "#ffc107"; // Color amarillo de "marcado"
+        elemento.style.backgroundColor = "#ffc107"; 
         elemento.classList.add('seleccionado');
     }
     actualizarBotonFlotante();
 }
 
-// Crea o actualiza un botón para finalizar la compra
 function actualizarBotonFlotante() {
     let btnComprar = document.getElementById('btn-confirmar-multi');
-    
     if (seleccionados.length > 0) {
         if (!btnComprar) {
             btnComprar = document.createElement('button');
@@ -90,28 +89,23 @@ function actualizarBotonFlotante() {
 
 function finalizarCompraMultiple() {
     const listaNumeros = seleccionados.map(n => n.toString().padStart(2, '0')).join(', ');
-    const total = seleccionados.length * 4000;
+    const total = seleccionados.length * 6000; // ACTUALIZADO A 6000
 
     const confirmar = confirm(`¿Quieres comprar los números: ${listaNumeros}?\nTotal: $${total}`);
-    
     if (confirmar) {
-        // Redirección a WhatsApp con todos los números
-        const mensaje = `¡Hola! Quiero los números: ${listaNumeros}. Total a pagar: $${total}. Envia el comprovante con tu nombre, gracias por tu compra!!! Mucha suerte!!!! ${alias}`;
+        const mensaje = `¡Hola! Quiero los números: ${listaNumeros}. Total a pagar: $${total}. Envío el comprobante con mi nombre. ${alias}`;
         window.open(`https://wa.me/${telefono}?text=${encodeURIComponent(mensaje)}`, '_blank');
 
-        // Guardar todos en Firebase
         database.ref('vendidos').once('value', (snapshot) => {
             let actual = snapshot.val() || [];
-            
             seleccionados.forEach(num => {
-                if (!actual.includes(num)) {
-                    actual.push(num);
-                }
+                if (!actual.includes(num)) actual.push(num);
             });
 
             database.ref('vendidos').set(actual).then(() => {
-                seleccionados = []; // Limpiamos la selección tras la compra
+                seleccionados = []; 
                 alert("Reserva enviada con éxito.");
+                actualizarBotonFlotante();
             });
         });
     }
