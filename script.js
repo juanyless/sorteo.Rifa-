@@ -16,7 +16,7 @@ const database = firebase.database();
 // Variables globales
 let contenedor; 
 const telefono = "543424494674"; 
-const alias = " ESTE ES MI ALIAS: alpes .cero .duque .mp";
+const alias = " Mandalo a este ALIAS:( alpes .cero .duque .mp), asi queda tu pago registrado para reclamar tu premio, gracias por tu colaboración.";
 let seleccionados = [];
 
 
@@ -102,7 +102,7 @@ function finalizarCompraMultiple() {
 
     const confirmar = confirm(`¿Quieres comprar los números: ${listaNumeros}?\nTotal: $${total}`);
     if (confirmar) {
-        const mensaje = `¡Hola! Quiero los números: ${listaNumeros}. Total a pagar: $${total}. Envío el comprobante con mi nombre. ${alias}`;
+        const mensaje = `¡Hola! Quiero los números: ${listaNumeros}. Total a pagar: $${total}. Envía el comprobante con tu nombre. ${alias}`;
         window.open(`https://wa.me/${telefono}?text=${encodeURIComponent(mensaje)}`, '_blank');
 
         database.ref('vendidos').once('value', (snapshot) => {
