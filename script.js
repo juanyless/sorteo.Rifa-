@@ -1,29 +1,25 @@
-// 1. CONFIGURACIÓN DE FIREBASE
+// 1. CONFIGURACIÓN DE FIREBASE (Mantén tus datos aquí)
 const firebaseConfig = {
-    apiKey: "AIzaSyBoI8JmEQCiYd6CcZ6mzWcW394RKlbWc_o",
-    authDomain: "sorteo-100.firebaseapp.com",
-    projectId: "sorteo-100",
-    storageBucket: "sorteo-100.firebasestorage.app",
-    messagingSenderId: "137713988986",
-    appId: "1:137713988986:web:380b74f6803569af7d12c3",
-    measurementId: "G-S3VZ8PG06V",
-    databaseURL: "https://sorteo-100-default-rtdb.firebaseio.com" 
+    // ... tus datos de apiKey, etc.
 };
 
 firebase.initializeApp(firebaseConfig);
 const database = firebase.database();
 
-const contenedor = document.getElementById('contenedor-numeros');
-const telefono = "543424494674"; 
-const alias = " ESTE ES MI ALIAS: alpes .cero .duque .mp";
+// USAMOS UN EVENTO PARA ASEGURARNOS QUE EL HTML CARGÓ
+window.addEventListener('DOMContentLoaded', () => {
+    const contenedor = document.getElementById('contenedor-numeros');
+    const telefono = "543424494674"; 
+    const alias = " ESTE ES MI ALIAS: alpes .cero .duque .mp";
 
-// VARIABLE PARA GUARDAR LA SELECCIÓN TEMPORAL
-let seleccionados = [];
+    let seleccionados = [];
 
-// 2. Escuchar la base de datos en tiempo real
-database.ref('vendidos').on('value', (snapshot) => {
-    const numerosComprados = snapshot.val() || [];
-    renderizarTablero(numerosComprados);
+    // 2. Escuchar la base de datos
+    database.ref('vendidos').on('value', (snapshot) => {
+        const numerosComprados = snapshot.val() || [];
+        // Pasamos el contenedor como argumento para que la función lo encuentre siempre
+        renderizarTablero(numerosComprados, contenedor, seleccionados);
+    });
 });
 
 function renderizarTablero(comprados) {
