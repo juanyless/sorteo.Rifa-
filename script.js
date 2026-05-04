@@ -16,7 +16,7 @@ const database = firebase.database();
 // Variables globales
 let contenedor; 
 const telefono = "543424494674"; 
-const alias = "  A este ALIAS:( alpes .cero .duque .mp), asi queda tu pago registrado para reclamar tu premio, gracias por tu colaboración.";
+const alias = "A este ALIAS:(alpes .cero .duque .mp), asi queda tu pago registrado para reclamar tu premio, gracias por tu colaboración.";
 let seleccionados = [];
 
 
