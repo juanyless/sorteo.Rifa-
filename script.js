@@ -19,11 +19,20 @@ const telefono = "543424494674";
 const alias = " ESTE ES MI ALIAS: alpes .cero .duque .mp";
 let seleccionados = [];
 
+
+
+
 // ESPERAR A QUE EL HTML ESTÉ TOTALMENTE CARGADO
 window.addEventListener('DOMContentLoaded', () => {
     // RECIÉN AQUÍ buscamos el contenedor
     contenedor = document.getElementById('contenedor-numeros');
 
+    
+    
+    
+    
+    
+    
     // Escuchar la base de datos en tiempo real
     database.ref('vendidos').on('value', (snapshot) => {
         const numerosComprados = snapshot.val() || [];
