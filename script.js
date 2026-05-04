@@ -98,7 +98,7 @@ function actualizarBotonFlotante() {
 
 function finalizarCompraMultiple() {
     const listaNumeros = seleccionados.map(n => n.toString().padStart(2, '0')).join(', ');
-    const total = seleccionados.length * 10.000; // ACTUALIZADO A 6000
+    const total = seleccionados.length * 10000; // ACTUALIZADO A 6000
 
     const confirmar = confirm(`¿Quieres comprar los números: ${listaNumeros}?\nTotal: $${total}`);
     if (confirmar) {
